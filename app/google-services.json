@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "451959372301",
+    "project_id": "neblog-ccbcf",
+    "storage_bucket": "neblog-ccbcf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:451959372301:android:dc1a8ffefc608588e17344",
+        "android_client_info": {
+          "package_name": "com.sc1prabin.neblog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "451959372301-467nv47etuqpgpf1t7bkgpbd1gghk2ht.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sc1prabin.neblog",
+            "certificate_hash": "ccdecdca91e837c022fcbef08ced9b12dc86328d"
+          }
+        },
+        {
+          "client_id": "451959372301-41svqs1jdmav4l4i7ctrf8sg8uomkkgr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2BjFLacCfxtoEPe7iNdlwOYxg7p_F9Ag"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "451959372301-41svqs1jdmav4l4i7ctrf8sg8uomkkgr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
