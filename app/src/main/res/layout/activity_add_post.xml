@@ -4,14 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
     tools:context=".AddPostActivity">
 
-    <ImageButton
+
+<!--    <com.theartofdev.edmodo.cropper.CropImageView-->
+<!--        xmlns:custom="http://schemas.android.com/apk/res-auto"-->
+<!--        android:id="@+id/cropImageView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_weight="1"-->
+<!--        -->
+<!--           -->
+<!--            android:layout_marginStart="8dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="8dp"-->
+<!--            android:background="@color/white"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:srcCompat="@mipmap/add_btn" />-->
+<!--        />-->
+
+    <ImageView
         android:id="@+id/imageButton"
-        android:layout_width="368dp"
-        android:layout_height="247dp"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:background="@color/white"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,6 +59,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageButton" />
 
     <EditText
+
         android:id="@+id/postDescriptionET"
         android:layout_width="0dp"
         android:layout_height="157dp"
@@ -50,7 +71,7 @@
         android:fontFamily="casual"
         android:gravity="start|right"
         android:hint="@string/post_description"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.31"
@@ -61,7 +82,7 @@
         android:id="@+id/postBtn"
         android:layout_width="290dp"
         android:layout_height="44dp"
-        android:background="@drawable/custom_button"
+        android:background="@color/bec"
         android:fontFamily="casual"
         android:gravity="center"
         android:text="@string/post"
@@ -69,8 +90,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.297"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/postDescriptionET"
-        app:layout_constraintVertical_bias="0.874" />
+        app:layout_constraintVertical_bias="0.326" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

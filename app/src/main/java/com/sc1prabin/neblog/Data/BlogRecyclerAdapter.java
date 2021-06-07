@@ -1,6 +1,7 @@
 package com.sc1prabin.neblog.Data;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +11,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
+import com.sc1prabin.neblog.AddPostActivity;
+import com.sc1prabin.neblog.CreateAccountActivity;
 import com.sc1prabin.neblog.Model.Blog;
 import com.sc1prabin.neblog.R;
-import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
+
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -46,16 +52,16 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
         holder.desc.setText(blog.getDescription());
 
 
+
         DateFormat dateFormat = DateFormat.getDateInstance();
         String formattedDate = dateFormat.format(new Date(Long.valueOf(blog.getTimestamp())).getTime());
         holder.timestamp.setText(formattedDate);
         String imageUrl = blog.getImage();
 
 
-        //TODO: use Picasso library to load image
-        Picasso.with(context)
-                .load(imageUrl)
-                .into(holder.imageView);
+
+        Glide.with(context).load(imageUrl).into(holder.imageView);
+
     }
 
     @Override

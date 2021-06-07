@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.internal.Storage;
@@ -31,7 +32,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.sc1prabin.neblog.Data.BlogRecyclerAdapter;
 import com.sc1prabin.neblog.Model.Blog;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.net.URL;
@@ -39,7 +43,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AddPostActivity extends AppCompatActivity {
-    private ImageButton mPostImage;
+    private ImageView mPostImage;
     private EditText mPostTitle;
     private EditText mPostDesc;
     private Button mSubmitButton;
@@ -56,7 +60,15 @@ public class AddPostActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == GALLERY_CODE && resultCode == RESULT_OK){
            mImageUri = data.getData();
-           mPostImage.setImageURI(mImageUri);
+
+//
+//            CropImage.activity(mImageUri).setAspectRatio(3,2).setCropShape(CropImageView.CropShape.valueOf(mImageUri.toString()))
+//                    .setGuidelines(CropImageView.Guidelines.ON)
+//                    .start(AddPostActivity.this);
+                    mPostImage.setImageURI(mImageUri);
+
+
+
         }
     }
 
@@ -122,24 +134,26 @@ public class AddPostActivity extends AppCompatActivity {
         if(!TextUtils.isEmpty(titleVal) && !TextUtils.isEmpty(descVal) && mImageUri != null){
             StorageReference filepath = mStorage.child("MBlog_images").child(mImageUri.getLastPathSegment());
 
-
-
-
             filepath.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    if (taskSnapshot.getMetadata() != null) {
+                        if (taskSnapshot.getMetadata().getReference() != null) {
+                            Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                            result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String imageUrl = uri.toString();
 
-                   Task<Uri> s =  mStorage.child("MBlog_images").child(mImageUri.getLastPathSegment()).getDownloadUrl();
-                   //small bug here
-
-
-                    DatabaseReference newPost  = mPostDatabase.push();
+                                    //createNewPost(imageUrl);
+                                    DatabaseReference newPost  = mPostDatabase.push();
                     Map<String, String> dataToSave = new HashMap<>();
+
 
                     dataToSave.put("title",titleVal);
                     dataToSave.put("description",descVal);
 
-                    dataToSave.put("image", s.toString());
+                    dataToSave.put("image", imageUrl);
                     dataToSave.put("timestamp",String.valueOf(java.lang.System.currentTimeMillis()));
                     dataToSave.put("userid",mUser.getUid());
 
@@ -147,9 +161,12 @@ public class AddPostActivity extends AppCompatActivity {
                     mProgressDialog.dismiss();
                     startActivity(new Intent(AddPostActivity.this, PostListActivity.class));
                     finish();
-                }
-            });
 
+                                }
+                            });
+                        }
+                    }
+                }});
 
         }
     }
